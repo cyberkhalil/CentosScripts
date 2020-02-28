@@ -12,9 +12,9 @@ if [ $? = 0 ]; then
 fi
 
 # solve dnf auto complete problem
-ask "Do you want to solve dnf completion problem ?"
+ask "Do you want to solve dnf autocompletion problem ? (recommended dnf has problem in completion)"
 if [ $? = 0 ]; then
-    echo "enable auto complete for dnf"
+    yum -y reinstall bash-completion sqlite
     complete -c dnf -w yum
 fi
 
