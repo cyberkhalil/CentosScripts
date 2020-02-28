@@ -8,7 +8,7 @@ ask(){ $(whiptail --yesno "$1" 20 60 3>&2 2>&1 1>&3); return $?;}
 ask "Do you want to update the system ?"
 if [ $? == 0 ]; then
     echo "Updating the system"
-    dnf update -q
+    dnf -y update -q
 fi
 
 # solve dnf auto complete problem
