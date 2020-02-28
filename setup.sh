@@ -16,7 +16,7 @@ ask "Do you want to solve dnf autocompletion problem ? (recommended dnf has prob
 if [ $? = 0 ]; then
     yum -y reinstall bash-completion sqlite
     complete -c dnf -w yum
-    if [ -e /usr/share/bash-completion/completions/dnf ]; then
+    if [ -f /usr/share/bash-completion/completions/dnf ]; then
         rm -f /usr/share/bash-completion/completions/dnf
         echo "complete -c dnf -w yum" >> /etc/profile
     fi
@@ -25,7 +25,8 @@ fi
 ask "Do you want to install vbox guests ?"
 if [ $? = 0 ]; then
     dnf -y install dkms bzip2 # install vbox guest requirements
-    if (ask "Insert vbox guest iso (yes if you did, no if you didn't)"); then # request insert virtualbox guest iso
+    ask "Insert vbox guest iso (yes if you did, no if you didn't)"
+    if [ $? = 0 ]; then # request insert virtualbox guest iso
         mkdir /tmp/vbiso/
         mount /dev/cdrom /tmp/vbiso
         ./tmp/vbiso/VBoxLinuxAdditions.run
