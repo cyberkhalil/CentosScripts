@@ -16,6 +16,9 @@ ask "Do you want to solve dnf autocompletion problem ? (recommended dnf has prob
 if [ $? = 0 ]; then
     yum -y reinstall bash-completion sqlite
     complete -c dnf -w yum
+    if [ -e /usr/share/bash-completion/completions/dnf ]; then
+        rm -f /usr/share/bash-completion/completions/dnf
+        echo "complete -c dnf -w yum" >> /etc/profile
 fi
 
 ask "Do you want to install vbox guests ?"
@@ -27,4 +30,16 @@ if [ $? = 0 ]; then
         ./tmp/vbiso/VBoxLinuxAdditions.run
         umount /tmp/vbiso
     fi
+fi
+
+# install nano
+ask "Do you want to install nano ?"
+if [ $? = 0 ]; then
+    yum -y install nano
+fi
+
+# install nano
+ask "reboot ? (recommended for dnf-completion,virtualbox guest)"
+if [ $? = 0 ]; then
+    reboot
 fi
