@@ -8,23 +8,23 @@ ask(){ $(whiptail --yesno "$1" 20 60 3>&2 2>&1 1>&3); return $?;}
 ask "Do you want to update the system ?"
 if [ $? = 0 ]; then
     echo "Updating the system"
-    dnf -yq update
+    dnf -y update
 fi
 
 # solve dnf auto complete problem
-ask "Do you want to solve dnf completion problem ?"
+ask "Do you want to solve dnf autocompletion problem ? (recommended dnf has problem in completion)"
 if [ $? = 0 ]; then
-    echo "enable auto complete for dnf"
+    yum -y reinstall bash-completion sqlite
     complete -c dnf -w yum
 fi
 
 ask "Do you want to install vbox guests ?"
 if [ $? = 0 ]; then
-    dnf -yq install dkms bzip2 # install vbox guest requirements
+    dnf -y install dkms bzip2 # install vbox guest requirements
     if (ask "Insert vbox guest iso (yes if you did, no if you didn't)"); then # request insert virtualbox guest iso
         mkdir /tmp/vbiso/
-        mount /dev/cdroom /tmp/vbiso
+        mount /dev/cdrom /tmp/vbiso
         ./tmp/vbiso/VBoxLinuxAdditions.run
-        umount /dev/cdroom /tmp/vbiso
+        umount /tmp/vbiso
     fi
 fi
