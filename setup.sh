@@ -25,5 +25,6 @@ if [ $? == 0 ]; then
         mkdir /tmp/vbiso/
         mount /dev/cdroom /tmp/vbiso
         ./tmp/vbiso/VBoxLinuxAdditions.run
+        umount /dev/cdroom /tmp/vbiso
     fi
 fi
