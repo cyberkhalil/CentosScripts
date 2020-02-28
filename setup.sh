@@ -23,8 +23,8 @@ if [ $? = 0 ]; then
     dnf -y install dkms bzip2 # install vbox guest requirements
     if (ask "Insert vbox guest iso (yes if you did, no if you didn't)"); then # request insert virtualbox guest iso
         mkdir /tmp/vbiso/
-        mount /dev/cdroom /tmp/vbiso
+        mount /dev/cdrom /tmp/vbiso
         ./tmp/vbiso/VBoxLinuxAdditions.run
-        umount /dev/cdroom /tmp/vbiso
+        umount /tmp/vbiso
     fi
 fi
