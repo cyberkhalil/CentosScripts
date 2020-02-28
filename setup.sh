@@ -8,7 +8,7 @@ ask(){ $(whiptail --yesno "$1" 20 60 3>&2 2>&1 1>&3); return $?;}
 ask "Do you want to update the system ?"
 if [ $? == 0 ]; then
     echo "Updating the system"
-    dnf -y update -q
+    dnf -yq update
 fi
 
 # solve dnf auto complete problem
@@ -20,7 +20,7 @@ fi
 
 ask "Do you want to install vbox guests ?"
 if [ $? == 0 ]; then
-    dnf -y install dkms bzip2 # install vbox guest requirements
+    dnf -yq install dkms bzip2 # install vbox guest requirements
     if (ask "Insert vbox guest iso (yes if you did, no if you didn't)"); then # request insert virtualbox guest iso
         mkdir /tmp/vbiso/
         mount /dev/cdroom /tmp/vbiso
