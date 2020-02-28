@@ -19,6 +19,7 @@ if [ $? = 0 ]; then
     if [ -e /usr/share/bash-completion/completions/dnf ]; then
         rm -f /usr/share/bash-completion/completions/dnf
         echo "complete -c dnf -w yum" >> /etc/profile
+    fi
 fi
 
 ask "Do you want to install vbox guests ?"
